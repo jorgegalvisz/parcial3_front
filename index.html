@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <title>SimonDice - Dos Jugadores</title>
-<script src="/socket.io/socket.io.js"></script>
+<script src="https://TU_BACKEND_DEPLOY.vercel.app/socket.io/socket.io.js"></script>
 <link rel="stylesheet" href="estilos.css" />
 </head>
 <body>
@@ -17,7 +17,8 @@
   </div>
 
   <script>
-    const socket = io();
+    // Conexión explícita al backend de Socket.IO
+    const socket = io("https://TU_BACKEND_DEPLOY.vercel.app");
     let jugador1 = prompt("Ingresa el nombre del Jugador 1 (Arduino):");
     let jugador2 = prompt("Ingresa el nombre del Jugador 2 (Teclado PC):");
     let turnoJugador2 = false;
@@ -69,18 +70,19 @@
 
     socket.on("ganador", (g) => {
       alert(`🎉 ¡Ganó ${g}!`);
-      location.reload(); // 🔥 Reinicia para pedir nombres otra vez
+      location.reload(); // Reinicia para volver a pedir nombres
     });
 
     socket.on("ambos-correcto", (nivel) => {
       alert(`✅ ¡Ambos acertaron! Siguiente nivel: ${nivel}`);
-      location.reload(); // 🔥 Reinicia para pedir nombres otra vez
+      location.reload();
     });
 
     socket.on("ninguno", (nivel) => {
       alert(`❌ Nadie acertó. El nivel se mantiene en: ${nivel}`);
-      location.reload(); // 🔥 Reinicia para pedir nombres otra vez
+      location.reload();
     });
   </script>
 </body>
 </html>
+  
